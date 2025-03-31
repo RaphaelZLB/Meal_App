@@ -17,7 +17,7 @@ class TabsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
   // final selectedPage = ref.read(NavBarProvider.notifier).setIndex;
   final availableMeals = ref.watch(filteredMealsProvider);
-  final selectedPageIndex = ref.watch(NavBarProvider);
+  final selectedPageIndex = ref.watch(navBarProvider);
 
     Widget activePage = CategoriesScreen(
       availableMeals: availableMeals,
@@ -39,7 +39,7 @@ class TabsScreen extends ConsumerWidget {
         } //after closing the FilterScreen() the function .then will take place}),
       }),
       bottomNavigationBar: BottomNavigationBar(
-          onTap: ref.read(NavBarProvider.notifier).setIndex,
+          onTap: ref.read(navBarProvider.notifier).setIndex,
           currentIndex: selectedPageIndex,
           items: const [
             BottomNavigationBarItem(

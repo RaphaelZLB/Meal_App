@@ -13,13 +13,10 @@ class MealGridView extends StatelessWidget {
     switch (meal.complexity) {
       case Complexity.simple:
         return 'Simple';
-        break;
       case Complexity.challenging:
         return 'Challenging';
-        break;
       case Complexity.hard:
         return 'Hard';
-        break;
       default:
         return 'Unknown';
         break;
@@ -30,16 +27,12 @@ class MealGridView extends StatelessWidget {
     switch (meal.affordability) {
       case Affordability.affordable:
         return 'Affordable';
-        break;
       case Affordability.pricey:
         return 'Pricey';
-        break;
       case Affordability.luxurious:
         return 'Luxurious';
-        break;
       default:
         return 'Unknown';
-        break;
     }
   }
 
@@ -47,8 +40,7 @@ class MealGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(16),
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       clipBehavior: Clip.hardEdge,
       //to fit the pic
       elevation: 3,

@@ -11,6 +11,6 @@ class NavBarNotifier extends StateNotifier<int> {
 }
 
 ///control the state of NavBarNotifier
-final NavBarProvider =
+final navBarProvider =
     StateNotifierProvider<NavBarNotifier, int>(//<Class + Type of State>
         (_) => NavBarNotifier());
