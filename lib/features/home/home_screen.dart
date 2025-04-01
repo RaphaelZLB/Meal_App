@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meal_app/provider/filters_provider.dart';
-import 'package:meal_app/provider/meal_provider.dart';
-import 'package:meal_app/provider/nav_bar_provider.dart';
+import 'package:meal_app/core/provider/filters_provider.dart';
+import 'package:meal_app/core/provider/meal_provider.dart';
+import 'package:meal_app/core/provider/nav_bar_provider.dart';
 import 'package:meal_app/screens/categories_screen.dart';
 import 'package:meal_app/screens/filter_screen.dart';
 import 'package:meal_app/screens/meals_screens.dart';
 import 'package:meal_app/widgets/drawer.dart';
-import '../provider/favourites_provider.dart';
+import '../../core/provider/favourites_provider.dart';
 
-class TabsScreen extends ConsumerWidget {
-  TabsScreen({super.key});
+class HomeScreen extends ConsumerWidget {
+  HomeScreen({super.key});
 
   String activePageTitle = 'Pick your Category';
   @override

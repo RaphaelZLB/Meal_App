@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screens/meals_screens.dart';
-import '../models/category.dart';
-import '../models/meal.dart';
+import '../core/models/category.dart';
+import '../core/models/meal.dart';
 
 class CategoryGridView extends StatelessWidget {
   const CategoryGridView(

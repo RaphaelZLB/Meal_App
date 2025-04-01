@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:meal_app/screens/tabs_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:meal_app/features/home/home_screen.dart';
+import 'features/authentication/auth_screen.dart';
+import 'core/theme/app_theme.dart';
+import 'core/theme/theme_provider.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
-var lightThemeColor = ColorScheme.fromSeed(
-  seedColor: const Color.fromRGBO(0, 150, 136, 1.0),
-);
-var darkThemeColor = ColorScheme.fromSeed(
-  seedColor: const Color.fromRGBO(0, 150, 136, 1.0),
-);
-
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final themeMode = ref.watch(themeProvider);
+
     return MaterialApp(
-      title: 'Meal App',
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        colorScheme: lightThemeColor,
-        textTheme: GoogleFonts.latoTextTheme(),
-      ),
-      home: TabsScreen(),
+      title: 'Foodie App',
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: themeMode,
+      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

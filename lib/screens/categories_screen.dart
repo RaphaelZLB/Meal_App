@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/widgets/category_grid_view.dart';
-import 'package:meal_app/data/dummy_data.dart';
+import 'package:meal_app/core/data/dummy_data.dart';
 
-import '../models/meal.dart';
+import '../core/models/meal.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key, required this.availableMeals});

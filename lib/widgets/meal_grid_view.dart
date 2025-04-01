@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meal_app/core/widgets/shimmer_gradiant.dart';
 import 'package:transparent_image/transparent_image.dart';
-import '../models/meal.dart';
+import '../core/models/meal.dart';
 
 class MealGridView extends StatelessWidget {
   const MealGridView(
@@ -44,7 +45,6 @@ class MealGridView extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       //to fit the pic
       elevation: 3,
-      //la yebroz l card
       child: InkWell(
         onTap: () => onSelectedMeal(meal),
         child: Column(
@@ -53,31 +53,72 @@ class MealGridView extends StatelessWidget {
               children: [
                 Hero(
                   tag: meal.id,
-                  child: FadeInImage(
-                      placeholder: MemoryImage(kTransparentImage),
-                      image: NetworkImage(meal.imageUrl)),
-                ),
-                Positioned(
-                  child: Column(
+                  child: Stack(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        color: Colors.black54,
-                        child: Text(
-                          meal.title,
-                          style: const TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          softWrap: true,
-                          overflow: TextOverflow.ellipsis,
+                      // Placeholder shimmer while image loads
+                      FadeTransition(
+                        opacity: const AlwaysStoppedAnimation(1.0),
+                        child: ShimmerLoading(
+                          height: 200,
+                          width: double.infinity,
+                          borderRadius: 0,
+                          child: Container(
+                            height: 200,
+                            color: Colors.white,
+                          ),
                         ),
+                      ),
+                      // Image that will fade in once loaded
+                      FadeInImage.memoryNetwork(
+                        placeholder: kTransparentImage,
+                        image: meal.imageUrl,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                        imageErrorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            height: 200,
+                            color: Colors.grey[300],
+                            child: const Center(
+                              child: Icon(Icons.error_outline, color: Colors.red),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                )
+                ),
+                // Positioned widget places its child at a specific position within a Stack
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.7),
+                        ],
+                      ),
+                    ),
+                    child: Text(
+                      meal.title,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
               ],
             ),
             Padding(
@@ -88,33 +129,27 @@ class MealGridView extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(Icons.access_time_outlined),
-                      const SizedBox(
-                        width: 3,
-                      ),
+                      const SizedBox(width: 3),
                       Text('${meal.duration} mins'),
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.restaurant_menu),
-                      const SizedBox(
-                        width: 3,
-                      ),
+                      const SizedBox(width: 3),
                       Text(complexityText),
                     ],
                   ),
                   Row(
                     children: [
                       const Icon(Icons.price_check_outlined),
-                      const SizedBox(
-                        width: 3,
-                      ),
+                      const SizedBox(width: 3),
                       Text(affordabilityText),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
